@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx src/app.tsx"
+    "build": "tsc",
+    "dev": "npm run build && npm run start",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -14,13 +16,19 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "bin": {
+    "clai": "./dist/index.js"
+  },
   "bugs": {
     "url": "https://github.com/ArjunAmbavane01/clai/issues"
   },
   "homepage": "https://github.com/ArjunAmbavane01/clai#readme",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "ink": "^5.2.1",
+    "ink-select-input": "^6.2.0",
+    "ink-text-input": "^6.0.0",
     "react": "^18.3.1"
   },
   "devDependencies": {
