@@ -1,6 +1,6 @@
+import React, { useState } from 'react'
 import { Box, Text } from 'ink'
 import TextInput from 'ink-text-input';
-import React, { useState } from 'react'
 import { writeApiKey } from '../utils/config.js';
 
 const ApiKeyPrompt = ({ setApiKey }: { setApiKey: React.Dispatch<React.SetStateAction<string | null>> }) => {
@@ -18,8 +18,8 @@ const ApiKeyPrompt = ({ setApiKey }: { setApiKey: React.Dispatch<React.SetStateA
         setErrorMsg(true);
     }
     return (
-        <Box borderStyle="round" padding={1} width={100} flexDirection='column' gap={1}>
-            <Box >
+        <Box borderStyle="round" padding={1} flexDirection='column' gap={1}>
+            <Box>
                 <Text>Enter your Api Key : </Text>
                 <TextInput value={input} onChange={setInput} onSubmit={handleSubmit} />
             </Box>

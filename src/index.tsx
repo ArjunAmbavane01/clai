@@ -1,22 +1,20 @@
 #!/usr/bin/env node
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { readApiKey } from './utils/config.js';
-import { Box, render, Text, useApp } from 'ink';
+import { render, useApp } from 'ink';
 import ApiKeyPrompt from './components/ApiKeyPrompt.js';
+import SessionInfo from './components/SessionInfo.js';
+import CLI from './components/CLI.js';
 
 const App = () => {
 
 	const [apiKey, setApiKey] = useState<string | null>(readApiKey());
 	const { exit } = useApp();
 
-	if (!apiKey) return (
-		<ApiKeyPrompt setApiKey={setApiKey} />
-	)
+	if (!apiKey) return (<ApiKeyPrompt setApiKey={setApiKey} />)
 
-	return (
-		<Text>Welcome to CLAI!</Text>
-	)
+	return (<CLI />)
 }
 
 render(<App />);
