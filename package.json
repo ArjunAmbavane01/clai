@@ -1,15 +1,32 @@
 {
   "name": "clai",
-  "module": "index.ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx src/app.tsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArjunAmbavane01/clai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
+  "bugs": {
+    "url": "https://github.com/ArjunAmbavane01/clai/issues"
   },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
+  "homepage": "https://github.com/ArjunAmbavane01/clai#readme",
+  "description": "",
   "dependencies": {
-    "dotenv": "^16.5.0"
+    "ink": "^5.2.1",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }
