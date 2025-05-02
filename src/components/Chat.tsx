@@ -1,5 +1,5 @@
-import { Box, Text } from 'ink'
 import React from 'react'
+import { Box, Text } from 'ink'
 
 const Chat = ({ content }: { content: string }) => {
     const codeBlockMatch = content.match(/```[a-z]*\n([\s\S]*?)```/);

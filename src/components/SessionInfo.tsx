@@ -7,7 +7,7 @@ const SessionInfo = () => {
     const workdir = cwd()
     const shortenedDir = workdir.length > 30 ? '...' + workdir.slice(-30) : workdir
     return (
-        <Box flexDirection='column' gap={1} marginY={2}>
+        <Box flexDirection='column' flexGrow={1} gap={1} marginY={2}>
             <Gradient name="atlas">
                 <Text bold={true} >• Welcome to CLAI</Text>
             </Gradient>

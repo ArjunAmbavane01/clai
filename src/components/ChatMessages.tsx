@@ -31,7 +31,7 @@ const Message = memo(({ message, idx }: { message: ChatMessage, idx: number }) =
 
 const ChatMessages = ({ messages }: { messages: ChatMessage[] }) => {
     return (
-        <Box flexDirection='column' gap={1} marginY={1}>
+        <Box flexDirection='column' flexGrow={1} gap={1} marginY={1}>
             {messages.map((message, idx) => (
                 <Message key={idx} message={message} idx={idx} />
             ))}
@@ -39,4 +39,4 @@ const ChatMessages = ({ messages }: { messages: ChatMessage[] }) => {
     )
 }
 
-export default ChatMessages;
+export default memo(ChatMessages);

@@ -11,8 +11,7 @@ export const readApiKey = (): string | null => {
             const fileContent = readFileSync(apiKeyFile, 'utf-8');
             if (fileContent == '') return null;
             const parsed = JSON.parse(fileContent) as ApiKeyFileContent;
-
-            if (typeof parsed.apiKey === 'string') return parsed.apiKey;
+            if (typeof parsed.apiKey === 'string' && parsed.apiKey !== '') return parsed.apiKey;
         }
     } catch (err) {
         console.error('Error reading api-key : ', err);

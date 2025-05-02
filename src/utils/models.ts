@@ -1,0 +1,1 @@
+export type Model = 'mistralai/mistral-7b-instruct'
