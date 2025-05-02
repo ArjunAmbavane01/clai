@@ -1,6 +1,6 @@
 import { Box, Text } from 'ink'
-import TextInput from 'ink-text-input'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import InputField from './InputField.js';
 
 interface UserPromptProps {
     sendUserPrompt: (userInput: string) => void,
@@ -10,7 +10,7 @@ interface UserPromptProps {
 const UserPrompt = ({ sendUserPrompt, isAwaitingResponse }: UserPromptProps) => {
     const [userInput, setUserInput] = useState<string>('');
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
         const processedInput = userInput.trim();
 
         if (processedInput === '/help') {
@@ -18,15 +18,24 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse }: UserPromptProps) => 
         }
         if (processedInput !== '') {
             sendUserPrompt(processedInput);
+            setUserInput('');
         }
-        setUserInput('')
-    }
+    }, [userInput, sendUserPrompt]);
+
+    const handleChange = useCallback((value: string) => {
+        setUserInput(value);
+    }, []);
     return (
         <Box flexDirection='column' marginBottom={1}>
             <Box borderStyle="round" paddingY={0.5} paddingX={1} flexDirection='column'>
                 {isAwaitingResponse ?
                     <Text color={'white'}>Thinking...</Text> :
-                    <TextInput value={userInput} onChange={setUserInput} onSubmit={handleSubmit} placeholder='Enter your prompt...' focus={!isAwaitingResponse} highlightPastedText />
+                    <InputField 
+                    value={userInput} 
+                    onChange={handleChange} 
+                    onSubmit={handleSubmit} 
+                    isDisabled={isAwaitingResponse} 
+                />
                 }
             </Box>
             <Text color={'gray'}>press ctrl+c to exit | send /help for commands </Text>

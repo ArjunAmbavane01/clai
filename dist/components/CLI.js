@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import SessionInfo from './SessionInfo.js';
 import ChatUI from './ChatMessages.js';
 import UserPrompt from './UserPrompt.js';
@@ -20,6 +20,8 @@ const sampleMessages = [
         content: `Just reverse the sort comparator:\n\n\`\`\`js\nfunction sortDescending(arr) {\n  return arr.sort((a, b) => b - a);\n}\n\`\`\``,
     },
 ];
+const MemoizedChatUI = memo(ChatUI);
+const MemoizedSessionInfo = memo(SessionInfo);
 const CLI = () => {
     const [messages, setMessages] = useState(sampleMessages);
     const [isAwaitingResponse, setIsAwaitingResponse] = useState(false);
@@ -28,8 +30,8 @@ const CLI = () => {
         setMessages([...messages, { role: 'user', content: userInput }]);
     };
     return (React.createElement(React.Fragment, null,
-        React.createElement(SessionInfo, null),
-        React.createElement(ChatUI, { messages: messages }),
+        React.createElement(MemoizedSessionInfo, null),
+        React.createElement(MemoizedChatUI, { messages: messages }),
         React.createElement(UserPrompt, { sendUserPrompt: sendUserPrompt, isAwaitingResponse: isAwaitingResponse })));
 };
 export default CLI;

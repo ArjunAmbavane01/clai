@@ -27,6 +27,7 @@ export interface ChatMessage {
     content: string
 }
 
+
 const CLI = () => {
     const [messages, setMessages] = useState<ChatMessage[]>(sampleMessages);
     const [isAwaitingResponse, setIsAwaitingResponse] = useState<boolean>(false);
@@ -35,7 +36,7 @@ const CLI = () => {
     const sendUserPrompt = (userInput: string) => {
         setIsAwaitingResponse(c=>!c);
         setMessages([...messages, { role: 'user', content: userInput }]);
-        
+
     }
 
     return (
@@ -46,5 +47,4 @@ const CLI = () => {
         </>
     )
 }
-
 export default CLI
