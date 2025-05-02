@@ -6,9 +6,10 @@ const ApiKeyPrompt = ({ setApiKey }) => {
     const [input, setInput] = useState('');
     const [errorMsg, setErrorMsg] = useState(false);
     const handleSubmit = () => {
-        if (input.trim() !== '') {
-            setApiKey(input.trim());
-            writeApiKey(input.trim());
+        const processedInput = input.trim();
+        if (processedInput !== '') {
+            setApiKey(processedInput);
+            writeApiKey(processedInput);
             setErrorMsg(false);
         }
         setInput('');

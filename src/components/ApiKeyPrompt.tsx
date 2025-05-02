@@ -9,9 +9,10 @@ const ApiKeyPrompt = ({ setApiKey }: { setApiKey: React.Dispatch<React.SetStateA
     const [errorMsg, setErrorMsg] = useState<boolean>(false);
 
     const handleSubmit = () => {
-        if (input.trim() !== '') {
-            setApiKey(input.trim());
-            writeApiKey(input.trim());
+        const processedInput = input.trim();
+        if (processedInput !== '') {
+            setApiKey(processedInput);
+            writeApiKey(processedInput);
             setErrorMsg(false);
         }
         setInput('')

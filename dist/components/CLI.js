@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SessionInfo from './SessionInfo.js';
 import ChatUI from './ChatMessages.js';
+import UserPrompt from './UserPrompt.js';
 const sampleMessages = [
     {
         role: 'user',
@@ -21,8 +22,14 @@ const sampleMessages = [
 ];
 const CLI = () => {
     const [messages, setMessages] = useState(sampleMessages);
+    const [isAwaitingResponse, setIsAwaitingResponse] = useState(false);
+    const sendUserPrompt = (userInput) => {
+        setIsAwaitingResponse(c => !c);
+        setMessages([...messages, { role: 'user', content: userInput }]);
+    };
     return (React.createElement(React.Fragment, null,
         React.createElement(SessionInfo, null),
-        React.createElement(ChatUI, { messages: messages })));
+        React.createElement(ChatUI, { messages: messages }),
+        React.createElement(UserPrompt, { sendUserPrompt: sendUserPrompt, isAwaitingResponse: isAwaitingResponse })));
 };
 export default CLI;

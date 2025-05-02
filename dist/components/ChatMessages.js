@@ -2,9 +2,9 @@ import { Box, Text } from 'ink';
 import React from 'react';
 import Chat from './Chat.js';
 const ChatMessages = ({ messages }) => {
-    return (React.createElement(Box, { flexDirection: 'column', gap: 1, marginY: 1 }, messages.map(message => {
+    return (React.createElement(Box, { flexDirection: 'column', gap: 1, marginY: 1 }, messages.map((message, idx) => {
         if (message.role === 'user') {
-            return (React.createElement(Box, { flexDirection: 'column' },
+            return (React.createElement(Box, { key: idx, flexDirection: 'column' },
                 React.createElement(Text, { bold: true, color: 'blueBright' }, "user"),
                 React.createElement(Box, null,
                     React.createElement(Text, { bold: true, color: 'blueBright' }, "\u21AA"),
@@ -12,7 +12,7 @@ const ChatMessages = ({ messages }) => {
                         React.createElement(Chat, { content: message.content })))));
         }
         else if (message.role === 'system') {
-            return (React.createElement(Box, { flexDirection: 'column' },
+            return (React.createElement(Box, { key: idx, flexDirection: 'column' },
                 React.createElement(Text, { bold: true, color: 'magentaBright' }, "clai"),
                 React.createElement(Box, null,
                     React.createElement(Text, { bold: true, color: 'magentaBright' }, "\u21AA"),

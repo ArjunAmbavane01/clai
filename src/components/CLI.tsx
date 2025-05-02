@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SessionInfo from './SessionInfo.js'
 import ChatUI from './ChatMessages.js';
+import UserPrompt from './UserPrompt.js';
 
 const sampleMessages: ChatMessage[] = [
     {
@@ -28,10 +29,20 @@ export interface ChatMessage {
 
 const CLI = () => {
     const [messages, setMessages] = useState<ChatMessage[]>(sampleMessages);
+    const [isAwaitingResponse, setIsAwaitingResponse] = useState<boolean>(false);
+
+
+    const sendUserPrompt = (userInput: string) => {
+        setIsAwaitingResponse(c=>!c);
+        setMessages([...messages, { role: 'user', content: userInput }]);
+        
+    }
+
     return (
         <>
             <SessionInfo />
-            <ChatUI messages={messages}/>
+            <ChatUI messages={messages} />
+            <UserPrompt sendUserPrompt={sendUserPrompt} isAwaitingResponse={isAwaitingResponse} />
         </>
     )
 }
