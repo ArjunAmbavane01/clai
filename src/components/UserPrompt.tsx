@@ -1,15 +1,15 @@
 import { Box, Text } from 'ink'
 import React, { memo, useCallback, useState } from 'react'
 import InputField from './InputField.js';
-import cliSpinners from 'cli-spinners';
 import Spinner from 'ink-spinner';
 
 interface UserPromptProps {
     sendUserPrompt: (userInput: string) => void,
     isAwaitingResponse: boolean,
+    setUI: React.Dispatch<React.SetStateAction<"chatUI" | "modelUI">>,
 }
 
-const UserPrompt = ({ sendUserPrompt, isAwaitingResponse }: UserPromptProps) => {
+const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI }: UserPromptProps) => {
     const [userInput, setUserInput] = useState<string>('');
 
     const handleSubmit = useCallback(() => {
@@ -17,7 +17,10 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse }: UserPromptProps) => 
         if (processedInput === '/help') {
             // handleHelpMessage();
         }
-        if (processedInput !== '') {
+        else if (processedInput === '/model') {
+            setUI('modelUI');
+        }
+        else if (processedInput !== '') {
             sendUserPrompt(processedInput);
         }
         setUserInput('');

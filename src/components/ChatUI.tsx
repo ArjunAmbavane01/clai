@@ -29,9 +29,9 @@ const Message = memo(({ message, idx }: { message: ChatMessage, idx: number }) =
     return null;
 });
 
-const ChatMessages = ({ messages }: { messages: ChatMessage[] }) => {
+const ChatUI = ({ messages }: { messages: ChatMessage[] }) => {
     return (
-        <Box flexDirection='column' flexGrow={1} gap={1} marginY={1}>
+        <Box flexDirection='column' flexGrow={1} gap={1} marginY={1} width={100}>
             {messages.map((message, idx) => (
                 <Message key={idx} message={message} idx={idx} />
             ))}
@@ -39,4 +39,4 @@ const ChatMessages = ({ messages }: { messages: ChatMessage[] }) => {
     )
 }
 
-export default memo(ChatMessages);
+export default memo(ChatUI);

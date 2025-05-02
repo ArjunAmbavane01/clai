@@ -13,7 +13,7 @@ const App = () => {
 
 	if (!apiKey) return (<ApiKeyPrompt setApiKey={setApiKey} />)
 
-	return (<CLI apiKey={apiKey}/>)
+	return (<CLI apiKey={apiKey} />)
 }
 
 render(<App />);
