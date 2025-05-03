@@ -1,18 +1,21 @@
 import TextInput from "ink-text-input";
 import React from 'react'
 
-const InputField = ({ value, onChange, onSubmit, isDisabled = false }: {
+interface InputFieldProps {
     value: string,
     onChange: (value: string) => void,
     onSubmit: () => void,
+    placeholder: string,
     isDisabled?: boolean
-}) => {
+}
+
+const InputField = ({ value, onChange, onSubmit, placeholder, isDisabled = false }: InputFieldProps) => {
     return (
         <TextInput
             value={value}
             onChange={onChange}
             onSubmit={onSubmit}
-            placeholder='Enter your prompt...'
+            placeholder={placeholder}
             focus={!isDisabled}
             highlightPastedText
         />

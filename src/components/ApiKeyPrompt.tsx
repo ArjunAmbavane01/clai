@@ -25,14 +25,13 @@ const ApiKeyPrompt = ({ setApiKey }: { setApiKey: React.Dispatch<React.SetStateA
     }, []);
 
     return (
-        <Box borderStyle="round" padding={1} flexDirection='column' gap={1}>
+        <Box borderStyle="round" padding={1} flexDirection='column' gap={1} marginBottom={1}>
             <Box>
-                <Text>Enter your Api Key : </Text>
-                <TextInput value={input} onChange={setInput} onSubmit={handleSubmit} />
                 <InputField
                     value={input}
                     onChange={handleChange}
                     onSubmit={handleSubmit}
+                    placeholder='Enter your Api Key'
                 />
             </Box>
             {errorMsg && <Text color={'red'}>Please enter a valid string!</Text>}

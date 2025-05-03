@@ -45,10 +45,14 @@ const CLI = ({ apiKey }: { apiKey: string }) => {
         setIsAwaitingResponse(c => !c);
         setMessages(prev => [...prev, { role: 'user', content: userInput }]);
 
-        const aiResponse = await sendToAi(userInput, model, apiKey);
-        console.log(aiResponse)
-        setMessages(prev => [...prev, { role: 'system', content: aiResponse }]);
-        setIsAwaitingResponse(c => !c);
+        // const aiResponse = await sendToAi(userInput, model, apiKey);
+        // console.log(aiResponse)
+        // setMessages(prev => [...prev, { role: 'system', content: aiResponse }]);
+
+        setTimeout(() => {
+            setMessages(prev => [...prev, { role: 'system', content: 'testing' }]);
+            setIsAwaitingResponse(c => !c);
+        }, 3000)
     }
 
     return (
@@ -57,11 +61,11 @@ const CLI = ({ apiKey }: { apiKey: string }) => {
             {ui === 'chatUI' && (
                 <>
                     {messages.length > 0 && <MemoizedChatUI messages={messages} />}
-                    <UserPrompt sendUserPrompt={sendUserPrompt} isAwaitingResponse={isAwaitingResponse} setUI={setUI} />
+                    <UserPrompt sendUserPrompt={sendUserPrompt} isAwaitingResponse={isAwaitingResponse} setUI={setUI} setMessages={setMessages} />
                 </>
             )}
             {ui === 'modelUI' && <MemoizedModelUI setUI={setUI} setModel={setModel} />}
         </>
     )
 }
-export default CLI
+export default CLI;

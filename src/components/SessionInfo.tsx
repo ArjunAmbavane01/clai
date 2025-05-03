@@ -5,9 +5,13 @@ import Gradient from 'ink-gradient';
 import { Model } from '../utils/models.js';
 
 const SessionInfo = ({ model }: { model: Model }) => {
-
-    const workdir = cwd();
-    const shortenedDir = workdir.length > 30 ? '...' + workdir.slice(-30) : workdir;
+    let shortenedDir = '';
+    try {
+        const workdir = cwd();
+        shortenedDir = workdir.length > 30 ? '...' + workdir.slice(-30) : workdir;
+    } catch (err) {
+        console.error("Error fetching current directory : ", err);
+    }
 
     return (
         <Box flexDirection='column' flexGrow={1} gap={1} marginY={2}>

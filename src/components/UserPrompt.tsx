@@ -1,15 +1,17 @@
 import { Box, Text } from 'ink'
 import React, { memo, useCallback, useState } from 'react'
 import InputField from './InputField.js';
-import Spinner from 'ink-spinner';
+import { ChatMessage } from './CLI.js';
+import Loading from './Loading.js';
 
 interface UserPromptProps {
     sendUserPrompt: (userInput: string) => void,
     isAwaitingResponse: boolean,
     setUI: React.Dispatch<React.SetStateAction<"chatUI" | "modelUI">>,
+    setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>
 }
 
-const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI }: UserPromptProps) => {
+const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: UserPromptProps) => {
     const [userInput, setUserInput] = useState<string>('');
 
     const handleSubmit = useCallback(() => {
@@ -19,6 +21,9 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI }: UserPromptPro
         }
         else if (processedInput === '/model') {
             setUI('modelUI');
+        }
+        else if (processedInput === '/clear') {
+            setMessages([]);
         }
         else if (processedInput !== '') {
             sendUserPrompt(processedInput);
@@ -34,13 +39,12 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI }: UserPromptPro
         <Box flexDirection='column' flexGrow={1} marginBottom={1}>
             <Box borderStyle="round" paddingY={0.5} paddingX={1} flexDirection='column'>
                 {isAwaitingResponse ?
-                    <Text color={'white'}>
-                        <Spinner type='bouncingBall' />{" "}Thinking<Spinner type='simpleDots' />
-                    </Text> :
+                    <Loading /> :
                     <InputField
                         value={userInput}
                         onChange={handleChange}
                         onSubmit={handleSubmit}
+                        placeholder='Enter your prompt...'
                         isDisabled={isAwaitingResponse}
                     />
                 }

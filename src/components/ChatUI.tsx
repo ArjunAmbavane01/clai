@@ -3,31 +3,17 @@ import React, { memo } from 'react'
 import { ChatMessage } from './CLI.js'
 import Chat from './Chat.js'
 
-const Message = memo(({ message, idx }: { message: ChatMessage, idx: number }) => {
-    if (message.role === 'user') {
-        return (
-            <Box key={idx} flexDirection='column'>
-                <Text bold color={'blueBright'}>user</Text>
-                <Box>
-                    <Text bold color={'blueBright'}>↪</Text><Box marginLeft={1}><Chat content={message.content} /></Box>
-                </Box>
+const Message = memo(({ message, idx }: { message: ChatMessage, idx: number }) => (
+    <Box key={idx} flexDirection='column'>
+        <Text bold color={message.role === 'user' ? 'blueBright' : 'magentaBright'}>{message.role}</Text>
+        <Box>
+            <Text bold color={message.role === 'user' ? 'blueBright' : 'magentaBright'}>↪</Text>
+            <Box marginLeft={1}>
+                <Chat content={message.content} />
             </Box>
-        )
-    } else if (message.role === 'system') {
-        return (
-            <Box key={idx} flexDirection='column'>
-                <Text bold color={'magentaBright'}>clai</Text>
-                <Box>
-                    <Text bold color={'magentaBright'}>↪</Text>
-                    <Box marginLeft={1}>
-                        <Chat content={message.content} />
-                    </Box>
-                </Box>
-            </Box>
-        )
-    }
-    return null;
-});
+        </Box>
+    </Box>
+));
 
 const ChatUI = ({ messages }: { messages: ChatMessage[] }) => {
     return (
