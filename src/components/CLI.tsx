@@ -11,25 +11,6 @@ export interface ChatMessage {
     content: string
 }
 
-const sampleMessages: ChatMessage[] = [
-    {
-        role: 'user',
-        content: 'Can you write a function to sort an array of numbers in JavaScript?',
-    },
-    {
-        role: 'system',
-        content: `Sure! Here's a simple implementation:\n\n\`\`\`js\nfunction sortArray(arr) {\n  return arr.sort((a, b) => a - b);\n}\n\`\`\``,
-    },
-    {
-        role: 'user',
-        content: 'What if I want to sort it in descending order?',
-    },
-    {
-        role: 'system',
-        content: `Just reverse the sort comparator:\n\n\`\`\`js\nfunction sortDescending(arr) {\n  return arr.sort((a, b) => b - a);\n}\n\`\`\``,
-    },
-];
-
 const MemoizedSessionInfo = memo(SessionInfo);
 const MemoizedChatUI = memo(ChatUI);
 const MemoizedModelUI = memo(ModelUI);
@@ -44,15 +25,8 @@ const CLI = ({ apiKey }: { apiKey: string }) => {
     const sendUserPrompt = async (userInput: string) => {
         setIsAwaitingResponse(c => !c);
         setMessages(prev => [...prev, { role: 'user', content: userInput }]);
-
-        // const aiResponse = await sendToAi(userInput, model, apiKey);
-        // console.log(aiResponse)
-        // setMessages(prev => [...prev, { role: 'system', content: aiResponse }]);
-
-        setTimeout(() => {
-            setMessages(prev => [...prev, { role: 'system', content: 'testing' }]);
-            setIsAwaitingResponse(c => !c);
-        }, 3000)
+        const aiResponse = await sendToAi(userInput, model, apiKey);
+        setMessages(prev => [...prev, { role: 'system', content: aiResponse }]);
     }
 
     return (

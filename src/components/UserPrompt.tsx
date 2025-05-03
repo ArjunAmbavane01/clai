@@ -1,4 +1,4 @@
-import { Box, Text } from 'ink'
+import { Box, Text, useApp } from 'ink'
 import React, { memo, useCallback, useRef, useState } from 'react'
 import InputField from './InputField.js';
 import { ChatMessage } from './CLI.js';
@@ -15,9 +15,11 @@ interface UserPromptProps {
 const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: UserPromptProps) => {
     const [userInput, setUserInput] = useState<string>('');
     const lastUserInputRef = useRef<string>('');
+    const { exit } = useApp();
 
     const handleSubmit = useCallback(() => {
         const processedInput = userInput.trim();
+        setUserInput('');
         if (processedInput === '/help') {
             const content = 'Options\n\n' + usageGuide;
             setMessages(prev => [...prev, { role: 'system', content }]);
@@ -31,11 +33,13 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: 
         else if (processedInput === '/retry') {
             sendUserPrompt(lastUserInputRef.current);
         }
+        else if (processedInput === '/exit') {
+            exit();
+        }
         else if (processedInput !== '') {
             sendUserPrompt(processedInput);
             lastUserInputRef.current = processedInput;
         }
-        setUserInput('');
     }, [userInput, sendUserPrompt]);
 
     const handleChange = useCallback((value: string) => {
@@ -44,7 +48,7 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: 
 
     return (
         <Box flexDirection='column' flexGrow={1} marginBottom={1}>
-            <Box borderStyle="round" paddingY={0.5} paddingX={1} flexDirection='column'>
+            <Box borderStyle="round" paddingY={0.5} paddingX={1} flexDirection='column' width={'100%'}>
                 {isAwaitingResponse ?
                     <Loading /> :
                     <InputField

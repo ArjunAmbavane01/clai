@@ -18,7 +18,7 @@ const SessionInfo = ({ model }: { model: Model }) => {
             <Gradient name="atlas">
                 <Text bold={true} >• Welcome to CLAI</Text>
             </Gradient>
-            <Box flexDirection='column' gap={1} paddingX={1} width={90} borderStyle={'round'} borderColor={'blue'} borderDimColor>
+            <Box flexDirection='column' gap={1} paddingX={1} width={'40%'} borderStyle={'round'} borderColor={'blue'} borderDimColor>
                 <Text>Session Info</Text>
                 <Box flexDirection='column'>
                     <Text>workdir : <Text color={'green'}>{shortenedDir}</Text></Text>

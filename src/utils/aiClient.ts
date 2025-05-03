@@ -10,7 +10,10 @@ export const sendToAi = async (content: string, model: Model, apiKey: string) =>
             },
             body: JSON.stringify({
                 model,
-                messages: [{ role: "user", content }]
+                messages: [
+                    { role: "system", content: "You are a helpful assistant. Keep responses concise and relevant." },
+                    { role: "user", content }
+                  ]
             })
         });
         
