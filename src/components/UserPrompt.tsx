@@ -1,8 +1,9 @@
 import { Box, Text } from 'ink'
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useRef, useState } from 'react'
 import InputField from './InputField.js';
 import { ChatMessage } from './CLI.js';
 import Loading from './Loading.js';
+import { usageGuide } from '../utils/help.js';
 
 interface UserPromptProps {
     sendUserPrompt: (userInput: string) => void,
@@ -13,20 +14,26 @@ interface UserPromptProps {
 
 const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: UserPromptProps) => {
     const [userInput, setUserInput] = useState<string>('');
+    const lastUserInputRef = useRef<string>('');
 
     const handleSubmit = useCallback(() => {
         const processedInput = userInput.trim();
         if (processedInput === '/help') {
-            // handleHelpMessage();
-        }
-        else if (processedInput === '/model') {
-            setUI('modelUI');
+            const content = 'Options\n\n' + usageGuide;
+            setMessages(prev => [...prev, { role: 'system', content }]);
         }
         else if (processedInput === '/clear') {
             setMessages([]);
         }
+        else if (processedInput === '/models') {
+            setUI('modelUI');
+        }
+        else if (processedInput === '/retry') {
+            sendUserPrompt(lastUserInputRef.current);
+        }
         else if (processedInput !== '') {
             sendUserPrompt(processedInput);
+            lastUserInputRef.current = processedInput;
         }
         setUserInput('');
     }, [userInput, sendUserPrompt]);
