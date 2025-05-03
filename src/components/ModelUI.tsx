@@ -21,7 +21,7 @@ const ModelUI = ({ setUI, setModel }: ModelUIProps) => {
         setUI('chatUI');
     }
     return (
-        <Box flexDirection='column' gap={1} >
+        <Box flexDirection='column' gap={1} marginBottom={1}>
             <Text>Choose your preferred model : </Text>
             <SelectInput items={items} onSelect={handleSelect} />
         </Box>
