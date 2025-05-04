@@ -6,13 +6,13 @@ import Loading from './Loading.js';
 import { usageGuide } from '../utils/help.js';
 
 interface UserPromptProps {
-    sendUserPrompt: (userInput: string) => void,
+    submitPrompt: (userInput: string) => void,
     isAwaitingResponse: boolean,
     setUI: React.Dispatch<React.SetStateAction<"chatUI" | "modelUI">>,
     setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>
 }
 
-const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: UserPromptProps) => {
+const UserPrompt = ({ submitPrompt, isAwaitingResponse, setUI, setMessages }: UserPromptProps) => {
     const [userInput, setUserInput] = useState<string>('');
     const lastUserInputRef = useRef<string>('');
     const { exit } = useApp();
@@ -31,16 +31,16 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: 
             setUI('modelUI');
         }
         else if (processedInput === '/retry') {
-            sendUserPrompt(lastUserInputRef.current);
+            submitPrompt(lastUserInputRef.current);
         }
         else if (processedInput === '/exit') {
             exit();
         }
         else if (processedInput !== '') {
-            sendUserPrompt(processedInput);
+            submitPrompt(processedInput);
             lastUserInputRef.current = processedInput;
         }
-    }, [userInput, sendUserPrompt]);
+    }, [userInput, submitPrompt]);
 
     const handleChange = useCallback((value: string) => {
         setUserInput(value);
@@ -60,7 +60,7 @@ const UserPrompt = ({ sendUserPrompt, isAwaitingResponse, setUI, setMessages }: 
                     />
                 }
             </Box>
-            <Text color={'gray'}>press ctrl+c to exit | send /help for commands </Text>
+            <Text color={'gray'}>press <Text color="yellow" bold>ctrl+c</Text> to exit | send /help for commands </Text>
         </Box>
     )
 }

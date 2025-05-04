@@ -1,10 +1,12 @@
-import React, { memo, useState } from 'react'
-import SessionInfo from './SessionInfo.js'
-import ChatUI from './ChatUI.js';
-import UserPrompt from './UserPrompt.js';
-import { sendToAi } from '../utils/aiClient.js';
+import React, { memo, useEffect, useRef, useState } from 'react'
+import { Box, Text } from 'ink';
 import { Model } from '../utils/models.js';
+import SessionInfo from './SessionInfo.js'
+import UserPrompt from './UserPrompt.js';
+import ChatUI from './ChatUI.js';
 import ModelUI from './ModelUI.js';
+import { useSubmitPrompt } from '../hooks/useSubmitPrompt.ts.js';
+import Spinner from 'ink-spinner';
 
 export interface ChatMessage {
     role: 'user' | 'system',
@@ -17,17 +19,33 @@ const MemoizedModelUI = memo(ModelUI);
 
 const CLI = ({ apiKey }: { apiKey: string }) => {
 
+    const [loading, setLoading] = useState(true);
     const [ui, setUI] = useState<'chatUI' | 'modelUI'>('chatUI');
     const [model, setModel] = useState<Model>('mistralai/mistral-7b-instruct');
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [isAwaitingResponse, setIsAwaitingResponse] = useState<boolean>(false);
+    const messageWindowRef = useRef<ChatMessage[]>([]);
+    const chatSummaryRef = useRef<string>('');
 
-    const sendUserPrompt = async (userInput: string) => {
-        setIsAwaitingResponse(c => !c);
-        setMessages(prev => [...prev, { role: 'user', content: userInput }]);
-        const aiResponse = await sendToAi(userInput, model, apiKey);
-        setMessages(prev => [...prev, { role: 'system', content: aiResponse }]);
-    }
+    const submitPrompt = useSubmitPrompt(model, apiKey, setMessages, setIsAwaitingResponse, messageWindowRef, chatSummaryRef);
+
+     useEffect(() => {
+            const timer = setTimeout(() => {
+                setLoading(false);
+            }, 1500);
+            
+            return () => clearTimeout(timer);
+        }, []);
+
+        if (loading) {
+            return (
+                <Box flexDirection="column" alignItems="center" justifyContent="center" height={10}>
+                    <Text>
+                        <Text color="blue"><Spinner type="dots" /></Text> Initializing CLAI environment...
+                    </Text>
+                </Box>
+            );
+        }
 
     return (
         <>
@@ -35,7 +53,7 @@ const CLI = ({ apiKey }: { apiKey: string }) => {
             {ui === 'chatUI' && (
                 <>
                     {messages.length > 0 && <MemoizedChatUI messages={messages} />}
-                    <UserPrompt sendUserPrompt={sendUserPrompt} isAwaitingResponse={isAwaitingResponse} setUI={setUI} setMessages={setMessages} />
+                    <UserPrompt submitPrompt={submitPrompt} isAwaitingResponse={isAwaitingResponse} setUI={setUI} setMessages={setMessages} />
                 </>
             )}
             {ui === 'modelUI' && <MemoizedModelUI setUI={setUI} setModel={setModel} />}
