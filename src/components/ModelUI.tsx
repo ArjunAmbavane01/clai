@@ -1,7 +1,7 @@
-import { Box, Text } from 'ink'
 import React from 'react'
-import { Model, models } from '../utils/models.js'
+import { Box, Text } from 'ink'
 import SelectInput from 'ink-select-input';
+import { Model, models } from '../utils/models.js'
 
 interface ModelUIProps {
     setUI: React.Dispatch<React.SetStateAction<"chatUI" | "modelUI">>,

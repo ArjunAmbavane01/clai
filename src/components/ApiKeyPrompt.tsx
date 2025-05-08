@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react'
 import { Box, Text } from 'ink'
-import TextInput from 'ink-text-input';
 import { writeApiKey } from '../utils/config.js';
 import InputField from './InputField.js';
 
@@ -20,9 +19,7 @@ const ApiKeyPrompt = ({ setApiKey }: { setApiKey: React.Dispatch<React.SetStateA
         setErrorMsg(true);
     }
 
-    const handleChange = useCallback((value: string) => {
-        setInput(value);
-    }, []);
+    const handleChange = useCallback((value: string) => { setInput(value) }, []);
 
     return (
         <Box borderStyle="round" padding={1} flexDirection='column' gap={1} marginBottom={1}>

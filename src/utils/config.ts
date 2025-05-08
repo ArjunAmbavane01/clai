@@ -3,6 +3,7 @@ import { homedir } from 'os';
 import { join } from 'path';
 
 interface ApiKeyFileContent { apiKey: string };
+
 const apiKeyFile = join(homedir(), '.clairc');
 
 export const readApiKey = (): string | null => {

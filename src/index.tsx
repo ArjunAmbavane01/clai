@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import React, { useState } from 'react';
-import { readApiKey } from './utils/config.js';
 import { render } from 'ink';
+import { readApiKey } from './utils/config.js';
 import ApiKeyPrompt from './components/ApiKeyPrompt.js';
 import CLI from './components/CLI.js';
 

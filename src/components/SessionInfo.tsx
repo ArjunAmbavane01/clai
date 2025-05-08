@@ -1,5 +1,5 @@
-import { cwd } from 'process';
 import React from 'react';
+import { cwd } from 'process';
 import { Box, Text, Spacer } from 'ink';
 import Gradient from 'ink-gradient';
 import BigText from 'ink-big-text';

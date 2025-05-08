@@ -1,5 +1,5 @@
-import TextInput from "ink-text-input";
 import React from 'react'
+import TextInput from "ink-text-input";
 
 interface InputFieldProps {
     value: string,

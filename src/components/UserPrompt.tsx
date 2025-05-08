@@ -1,7 +1,7 @@
-import { Box, Text, useApp } from 'ink'
 import React, { memo, useCallback, useRef, useState } from 'react'
-import InputField from './InputField.js';
+import { Box, Text, useApp } from 'ink'
 import Loading from './Loading.js';
+import InputField from './InputField.js';
 import { usageGuide } from '../utils/help.js';
 import { ChatMessage } from '../utils/chatTypes.js';
 

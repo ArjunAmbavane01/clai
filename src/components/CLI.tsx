@@ -1,12 +1,12 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { Box, Text } from 'ink';
-import { Model } from '../utils/models.js';
+import Spinner from 'ink-spinner';
 import SessionInfo from './SessionInfo.js'
 import UserPrompt from './UserPrompt.js';
 import ChatUI from './ChatUI.js';
 import ModelUI from './ModelUI.js';
 import { useSubmitPrompt } from '../hooks/useSubmitPrompt.ts.js';
-import Spinner from 'ink-spinner';
+import { Model } from '../utils/models.js';
 import { ChatMessage } from '../utils/chatTypes.js';
 
 const MemoizedSessionInfo = memo(SessionInfo);

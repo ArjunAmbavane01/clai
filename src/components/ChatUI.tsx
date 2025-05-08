@@ -1,5 +1,5 @@
-import { Box, Text } from 'ink'
 import React, { memo } from 'react'
+import { Box, Text } from 'ink'
 import Chat from './Chat.js'
 import { ChatMessage } from '../utils/chatTypes.js';
 
