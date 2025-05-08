@@ -1,7 +1,7 @@
 import { Box, Text } from 'ink'
 import React, { memo } from 'react'
-import { ChatMessage } from './CLI.js'
 import Chat from './Chat.js'
+import { ChatMessage } from '../utils/chatTypes.js';
 
 const Message = memo(({ message, idx }: { message: ChatMessage, idx: number }) => (
     <Box key={idx} flexDirection='column'>
@@ -9,7 +9,7 @@ const Message = memo(({ message, idx }: { message: ChatMessage, idx: number }) =
         <Box>
             <Text bold color={message.role === 'user' ? 'blueBright' : 'magentaBright'}>↪</Text>
             <Box marginLeft={1}>
-                <Chat content={message.content} />
+                <Chat content={message.content} isTerminalOutput={message.isTerminalOutput} />
             </Box>
         </Box>
     </Box>
