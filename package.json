@@ -1,9 +1,8 @@
 {
-  "name": "clai",
+  "name": "@arjun/clai",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev": "npm run build && npm run start",
     "start": "node dist/index.js"
@@ -12,8 +11,20 @@
     "type": "git",
     "url": "git+https://github.com/ArjunAmbavane01/clai.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Arjun Ambavane <arjun.ambavane@gmail.com>",
+  "description": "A sleek, AI-powered terminal assistant that answers questions and runs shell commands.",
+  "keywords": [
+    "cli",
+    "clai",
+    "ai",
+    "openai",
+    "terminal",
+    "assistant",
+    "gpt",
+    "linux",
+    "windows",
+    "macos"
+  ],
   "license": "ISC",
   "type": "module",
   "bin": {
@@ -23,9 +34,7 @@
     "url": "https://github.com/ArjunAmbavane01/clai/issues"
   },
   "homepage": "https://github.com/ArjunAmbavane01/clai#readme",
-  "description": "",
   "dependencies": {
-    "dotenv": "^16.5.0",
     "ink": "^5.2.1",
     "ink-big-text": "^2.0.0",
     "ink-gradient": "^3.0.0",
@@ -38,9 +47,12 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
-    "@types/node-summary": "^1.2.3",
     "@types/react": "^19.1.2",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }

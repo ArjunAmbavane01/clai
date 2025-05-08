@@ -10,12 +10,6 @@
   </a>
 </div>
 
-<p>
-  <code style="background-color:#2d2d2d; color:#c9d1d9; padding:0.3em 0.6em; border-radius:6px; font-family:monospace;">
-    npm i -g clai
-  </code>
-</p>
-
 ## ✨ Features
 
 - **Terminal Integration**: AI assistant that lives in your terminal
