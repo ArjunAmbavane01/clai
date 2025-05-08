@@ -1,5 +1,5 @@
 {
-  "name": "@arjun/clai",
+  "name": "@rjun/clai",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "scripts": {
