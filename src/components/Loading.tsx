@@ -2,10 +2,10 @@ import { Text } from 'ink'
 import Spinner from 'ink-spinner'
 import React from 'react'
 
-const Loading = () => {
+const Loading = ({ text }: { text: string }) => {
     return (
         <Text color={'white'}>
-            Thinking<Spinner type='simpleDots' />
+            {text}<Spinner type='simpleDots' />
         </Text>
     )
 }
