@@ -1,16 +1,17 @@
 <h1 align="center">CLAI — Command Line AI Assistant</h1>
 <p align="center">⚡ A sleek, AI-powered terminal assistant that runs commands and answers your coding questions intelligently.</p>
 
-![CLAI Demo](https://github.com/ArjunAmbavane01/clai/raw/main/.github/clai-demo.gif)
-
 <div align="center">
-  <a href="https://www.npmjs.com/package/clai">
+  <a href="https://www.npmjs.com/package/@rjun/clai">
     <img src="https://img.shields.io/npm/v/clai.svg" alt="npm version" />
   </a>  
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" />
   </a>
 </div>
+
+![CLAI Demo](https://github.com/ArjunAmbavane01/clai/raw/main/.github/clai-demo.gif)
+
 
 ## ✨ Features
 
